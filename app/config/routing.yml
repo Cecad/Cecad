@@ -1,0 +1,4 @@
+distrital_cecad:
+    resource: "@DistritalCecadBundle/Resources/config/routing.yml"
+    prefix:   /
+
