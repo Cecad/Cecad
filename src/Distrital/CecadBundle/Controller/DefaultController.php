@@ -58,7 +58,8 @@ class DefaultController extends Controller
 
 
 		$directores = $r_director->findAll();
-		$equiposProyecto = array();//$r_equipoProyecto->findAll();
+		
+		$equiposProyecto = $r_equipoProyecto->findAll();
 
 		
 		

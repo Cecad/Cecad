@@ -34,7 +34,6 @@ class Director
 
    /**
      * @ORM\OneToMany(targetEntity="EquipoProyecto", mappedBy="director")
-     * @ORM\JoinColumn(referencedColumnName="id")
      */
     private $equipos;
 
