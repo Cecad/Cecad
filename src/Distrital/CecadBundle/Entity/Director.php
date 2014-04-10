@@ -3,6 +3,7 @@
 namespace Distrital\CecadBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Distrital\CecadBundle\Entity\EquipoProyecto;
 
 /**
  * Director
@@ -27,6 +28,15 @@ class Director
      * @ORM\Column(name="cod_director", type="integer")
      */
     private $codDirector;
+    
+    
+    
+
+   /**
+     * @ORM\OneToMany(targetEntity="EquipoProyecto", mappedBy="director")
+     * @ORM\JoinColumn(referencedColumnName="id")
+     */
+    private $equipos;
 
 
     /**
@@ -60,5 +70,45 @@ class Director
     public function getCodDirector()
     {
         return $this->codDirector;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->equipos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add equipos
+     *
+     * @param \Distrital\CecadBundle\Entity\EquipoProyecto $equipos
+     * @return Director
+     */
+    public function addEquipo(\Distrital\CecadBundle\Entity\EquipoProyecto $equipos)
+    {
+        $this->equipos[] = $equipos;
+
+        return $this;
+    }
+
+    /**
+     * Remove equipos
+     *
+     * @param \Distrital\CecadBundle\Entity\EquipoProyecto $equipos
+     */
+    public function removeEquipo(\Distrital\CecadBundle\Entity\EquipoProyecto $equipos)
+    {
+        $this->equipos->removeElement($equipos);
+    }
+
+    /**
+     * Get equipos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEquipos()
+    {
+        return $this->equipos;
     }
 }

@@ -3,6 +3,7 @@
 namespace Distrital\CecadBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Distrital\CecadBundle\Entity\Director;
 
 /**
  * EquipoProyecto
@@ -34,6 +35,15 @@ class EquipoProyecto
      * @ORM\Column(name="estado_equ_pro", type="string", length=1)
      */
     private $estadoEquPro;
+    
+        
+	/**
+	* @ORM\ManyToOne(targetEntity="Director")
+	* @ORM\JoinColumn(name="idDirector", referencedColumnName="id")
+	*/
+	protected $director;
+    
+    
 
 
     /**
@@ -90,5 +100,28 @@ class EquipoProyecto
     public function getEstadoEquPro()
     {
         return $this->estadoEquPro;
+    }
+
+    /**
+     * Set director
+     *
+     * @param \Distrital\CecadBundle\Entity\Director $director
+     * @return EquipoProyecto
+     */
+    public function setDirector(\Distrital\CecadBundle\Entity\Director $director = null)
+    {
+        $this->director = $director;
+
+        return $this;
+    }
+
+    /**
+     * Get director
+     *
+     * @return \Distrital\CecadBundle\Entity\Director 
+     */
+    public function getDirector()
+    {
+        return $this->director;
     }
 }

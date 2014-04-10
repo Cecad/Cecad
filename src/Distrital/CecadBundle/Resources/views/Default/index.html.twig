@@ -1,1 +1,31 @@
-Hello {{ name }}!
+Este es el index del proyecto
+
+Directores:
+<ul>
+{% for d in directores%}
+	<li>{{d.codDirector}} <br>
+	
+
+	{% if d.equipos|length > 0 %}
+		<ol>
+		{% for e in d.equipos %}
+			<li>{{e.fechaIni|date("m/d/Y") }} - {{e.estadoEquPro}} - {{e.director.codDirector}} </li>
+		{% endfor %}
+		</ol>
+	
+	{% endif %}
+	
+	</li>
+	
+	
+{% endfor %}
+</ul>
+Fin directores
+
+Equipos:
+<ol>
+{% for e in equiposProyecto %}
+	<li>{{e.fechaIni|date("m/d/Y") }} - {{e.estadoEquPro}} - {{e.director.codDirector}} </li>
+{% endfor %}
+</ol>
+Fin equipos
