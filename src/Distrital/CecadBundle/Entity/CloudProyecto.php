@@ -35,11 +35,26 @@ class CloudProyecto
      */
     private $fechaIniLabPro;
 
+	
+	/**
+	* @ORM\ManyToOne(targetEntity="Proyecto")
+	* @ORM\JoinColumn(name="idProyecto", referencedColumnName="id")
+	*/
+	protected $proyecto;
+	/**
+	* @ORM\ManyToOne(targetEntity="Cloud")
+	* @ORM\JoinColumn(name="idCloud", referencedColumnName="id")
+	*/
+	protected $cloud;			
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_fin_lab_pro", type="datetime")
      */
+	 
+	
+	
+	 
     private $fechaFinLabPro;
 
     /**

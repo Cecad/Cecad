@@ -28,11 +28,28 @@ class ProyectoAcceso
      */
     private $fechaIniAcc;
 
+     
+	/**
+	* @ORM\ManyToOne(targetEntity="Acceso")
+	* @ORM\JoinColumn(name="idAcceso", referencedColumnName="id")
+	*/
+	protected $acceso;
+	/**
+	* @ORM\ManyToOne(targetEntity="Proyecto")
+	* @ORM\JoinColumn(name="idProyecto", referencedColumnName="id")
+	*/
+	protected $proyecto;
+	
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_fin_acc", type="datetime")
      */
+	 
+	 
+	 
+	 
+	
     private $fechaFinAcc;
 
     /**

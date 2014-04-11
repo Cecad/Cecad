@@ -5,6 +5,7 @@ namespace Distrital\CecadBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Distrital\CecadBundle\Entity\EquipoProyecto;
 
+
 /**
  * Director
  *
@@ -29,10 +30,7 @@ class Director
      */
     private $codDirector;
     
-    
-    
-
-   /**
+       /**
      * @ORM\OneToMany(targetEntity="EquipoProyecto", mappedBy="director")
      */
     private $equipos;

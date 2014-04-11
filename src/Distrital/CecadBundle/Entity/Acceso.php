@@ -28,6 +28,10 @@ class Acceso
      */
     private $codAcceso;
 
+	 /**
+     * @ORM\OneToMany(targetEntity="ProyectoAcceso", mappedBy="Acceso")
+     */
+	 private $accesos;	
     /**
      * @var string
      *

@@ -28,11 +28,26 @@ class Cloud
      */
     private $codCloud;
 
+	/**
+	* @ORM\ManyToOne(targetEntity="Hardware")
+	* @ORM\JoinColumn(name="idHardware", referencedColumnName="id")
+	*/
+	 protected $hardware;
+	 
+	 /**
+	* @ORM\ManyToOne(targetEntity="CloudProyecto")
+	* @ORM\JoinColumn(name="idCloudProyecto", referencedColumnName="id")
+	*/
+	private $cloudproyectos;
+	 
     /**
      * @var string
      *
      * @ORM\Column(name="nombre_cloud", type="string", length=255)
      */
+	 
+	
+	 
     private $nombreCloud;
 
     /**

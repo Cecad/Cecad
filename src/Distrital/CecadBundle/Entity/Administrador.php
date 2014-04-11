@@ -28,6 +28,10 @@ class Administrador
      */
     private $codAdmin;
 
+	 /**
+     * @ORM\OneToMany(targetEntity="EquipoProyecto", mappedBy="administrador")
+     */
+	 private $equipos;
     /**
      * @var string
      *

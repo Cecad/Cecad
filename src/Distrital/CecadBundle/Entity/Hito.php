@@ -21,11 +21,19 @@ class Hito
      */
     private $id;
 
+	/**
+	* @ORM\ManyToOne(targetEntity="Proyecto")
+	* @ORM\JoinColumn(name="idProyecto", referencedColumnName="id")
+	*/	
+	 protected $proyecto;
     /**
      * @var integer
      *
      * @ORM\Column(name="cod_hito", type="integer")
      */
+	 
+	
+
     private $codHito;
 
     /**

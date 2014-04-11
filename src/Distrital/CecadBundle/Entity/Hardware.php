@@ -3,7 +3,7 @@
 namespace Distrital\CecadBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Distrital\CecadBundle\Entity\Software;
 /**
  * Hardware
  *
@@ -28,11 +28,24 @@ class Hardware
      */
     private $serial;
 
+	/**
+	* @ORM\ManyToOne(targetEntity="Software")
+	* @ORM\JoinColumn(name="idSoftware", referencedColumnName="id")
+	*/
+	protected $software;
+	 /**
+     * @ORM\OneToMany(targetEntity="Cloud", mappedBy="Hardware")
+     */
+	 private $clouds;
     /**
      * @var string
      *
      * @ORM\Column(name="nombre_hardware", type="string", length=255)
      */
+	 
+	 
+	 
+	 
     private $nombreHardware;
 
     /**

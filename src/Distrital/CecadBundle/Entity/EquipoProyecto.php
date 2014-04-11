@@ -42,7 +42,20 @@ class EquipoProyecto
 	* @ORM\JoinColumn(name="idDirector", referencedColumnName="id")
 	*/
 	protected $director;
-    
+	/**
+	* @ORM\ManyToOne(targetEntity="Investigador")
+	* @ORM\JoinColumn(name="idInvestigador", referencedColumnName="id")
+	*/
+	protected $investigador;
+	/**
+	* @ORM\ManyToOne(targetEntity="Administrador")
+	* @ORM\JoinColumn(name="idAdministrador", referencedColumnName="id")
+	*/
+	protected $administrador; 
+	/**
+    * @ORM\OneToMany(targetEntity="Proyecto", mappedBy="EquipoProyecto")
+    */
+	 
     
 
 

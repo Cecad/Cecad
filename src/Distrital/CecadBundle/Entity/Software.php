@@ -28,6 +28,10 @@ class Software
      */
     private $codSoftware;
 
+	 /**
+     * @ORM\OneToMany(targetEntity="Hardware", mappedBy="software")
+     */
+	 private $hardwares;
     /**
      * @var string
      *

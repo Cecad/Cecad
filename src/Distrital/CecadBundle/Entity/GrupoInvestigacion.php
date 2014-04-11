@@ -3,6 +3,7 @@
 namespace Distrital\CecadBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Distrital\CecadBundle\Entity\Proyecto;
 
 /**
  * GrupoInvestigacion
@@ -28,6 +29,10 @@ class GrupoInvestigacion
      */
     private $codGrupo;
 
+	/**
+     * @ORM\OneToMany(targetEntity="Proyecto", mappedBy="grupoinvestigacion")
+     */
+	private $proyectos;
     /**
      * @var string
      *

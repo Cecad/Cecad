@@ -3,6 +3,7 @@
 namespace Distrital\CecadBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Distrital\CecadBundle\Entity\GrupoInvestigacion;
 
 /**
  * Proyecto
@@ -28,11 +29,34 @@ class Proyecto
      */
     private $codProyecto;
 
+	/**
+	* @ORM\ManyToOne(targetEntity="EquipoProyecto")
+	* @ORM\JoinColumn(name="idEquipoProyecto", referencedColumnName="id")
+	*/
+	protected $equipoproyecto;
+    /**
+	* @ORM\ManyToOne(targetEntity="GrupoInvestigacion")
+	* @ORM\JoinColumn(name="idGrupoInvestigacion", referencedColumnName="id")
+	*/
+	protected $GrupoInvestigacion;
+	 /**
+     * @ORM\OneToMany(targetEntity="Hito", mappedBy="proyecto")
+     */
+	  private $hitos;
     /**
      * @var string
      *
      * @ORM\Column(name="nom_proyecto", type="string", length=255)
      */
+
+	 
+	 
+	 
+	 
+	 
+	
+	 
+	 
     private $nomProyecto;
 
     /**

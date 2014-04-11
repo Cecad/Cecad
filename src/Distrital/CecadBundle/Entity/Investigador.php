@@ -28,6 +28,10 @@ class Investigador
      */
     private $codEstudiante;
 
+	   /**
+     * @ORM\OneToMany(targetEntity="EquipoProyecto", mappedBy="investigador")
+     */
+	  private $equipos;
     /**
      * @var string
      *
