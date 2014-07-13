@@ -1,3 +1,46 @@
+
+login:
+    pattern: /login
+    defaults: { _controller: DistritalCecadBundle:Default:login }
+
+login_check:
+    pattern: /login_check
+
+registro:
+    pattern: /registro
+    defaults: { _controller: DistritalCecadBundle:Default:registro }
+
+
+
+logout:
+    pattern: /logout
+    defaults: { _controller: DistritalCecadBundle:Default:logout }
+
+logout_check:
+    pattern: /logout_check
+
+
+
+
 distrital_cecad_homepage:
     pattern:  /
     defaults: { _controller: DistritalCecadBundle:Default:index }
+
+
+distrital_cecad_contenidos:
+    pattern:  /page/{pagina}
+    defaults: { _controller: DistritalCecadBundle:Contenidos:index }
+
+
+distrital_cecad_usuario:
+    resource: "@DistritalCecadBundle/Controller/UsuarioController.php"
+    type: annotation
+    prefix: /
+
+
+
+
+distrital_cecad_proyecto:
+    resource: "@DistritalCecadBundle/Controller/ProyectoController.php"
+    type: annotation
+    prefix: /
