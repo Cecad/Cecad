@@ -279,4 +279,27 @@ class Hito
     {
         return $this->correciones;
     }
+
+    /**
+     * Set proyecto
+     *
+     * @param \Distrital\CecadBundle\Entity\Proyecto $proyecto
+     * @return Hito
+     */
+    public function setProyecto(\Distrital\CecadBundle\Entity\Proyecto $proyecto = null)
+    {
+        $this->proyecto = $proyecto;
+
+        return $this;
+    }
+
+    /**
+     * Get proyecto
+     *
+     * @return \Distrital\CecadBundle\Entity\Proyecto 
+     */
+    public function getProyecto()
+    {
+        return $this->proyecto;
+    }
 }

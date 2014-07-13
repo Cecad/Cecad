@@ -95,4 +95,44 @@ class Acceso
     {
         return $this->nomPrivilegio;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->accesos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add accesos
+     *
+     * @param \Distrital\CecadBundle\Entity\ProyectoAcceso $accesos
+     * @return Acceso
+     */
+    public function addAcceso(\Distrital\CecadBundle\Entity\ProyectoAcceso $accesos)
+    {
+        $this->accesos[] = $accesos;
+
+        return $this;
+    }
+
+    /**
+     * Remove accesos
+     *
+     * @param \Distrital\CecadBundle\Entity\ProyectoAcceso $accesos
+     */
+    public function removeAcceso(\Distrital\CecadBundle\Entity\ProyectoAcceso $accesos)
+    {
+        $this->accesos->removeElement($accesos);
+    }
+
+    /**
+     * Get accesos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAccesos()
+    {
+        return $this->accesos;
+    }
 }

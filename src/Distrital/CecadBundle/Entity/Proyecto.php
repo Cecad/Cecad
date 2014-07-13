@@ -22,78 +22,76 @@ class Proyecto
      */
     private $id;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="cod_proyecto", type="integer")
-     */
-    private $codProyecto;
 
 	/**
-	* @ORM\ManyToOne(targetEntity="EquipoProyecto")
-	* @ORM\JoinColumn(name="idEquipoProyecto", referencedColumnName="id")
+	* @ORM\OneToMany(targetEntity="Hito", mappedBy="proyecto")
 	*/
-	protected $equipoproyecto;
-    /**
-	* @ORM\ManyToOne(targetEntity="GrupoInvestigacion")
-	* @ORM\JoinColumn(name="idGrupoInvestigacion", referencedColumnName="id")
-	*/
-	protected $GrupoInvestigacion;
-	 /**
-     * @ORM\OneToMany(targetEntity="Hito", mappedBy="proyecto")
-     */
-	  private $hitos;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom_proyecto", type="string", length=255)
-     */
-
-	 
-	 
-	 
-	 
-	 
+	private $hitos;
 	
-	 
-	 
-    private $nomProyecto;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255)
+     */
+
+    private $nombre;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fec_inicio", type="datetime")
+     * @ORM\Column(name="fechaInicio", type="datetime")
      */
-    private $fecInicio;
+    private $fechaInicio;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fec_final", type="datetime")
+     * @ORM\Column(name="fechaFinal", type="datetime")
      */
-    private $fecFinal;
+    private $fechaFinal;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="desc_proyecto", type="text")
+     * @ORM\Column(name="descripcion", type="text")
      */
-    private $descProyecto;
+    private $descripcion;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="obj_proyecto", type="text")
+     * @ORM\Column(name="objetivos", type="text")
      */
-    private $objProyecto;
+    private $objetivos;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="estado_proyecto", type="string", length=1)
+     * @ORM\Column(name="estado", type="string", length=1)
      */
-    private $estadoProyecto;
+    private $estado;
 
+
+	/**
+     * @ORM\OneToMany(targetEntity="ParticipanteProyecto", mappedBy="proyecto")
+     */
+	protected $participantes;
+	
+    /**
+	* @ ORM\ManyToOne(targetEntity="GrupoInvestigacion")
+	* @ ORM\JoinColumn(name="idGrupoInvestigacion", referencedColumnName="id")
+	protected $GrupoInvestigacion;
+	*/
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->hitos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->participantes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -106,163 +104,206 @@ class Proyecto
     }
 
     /**
-     * Set codProyecto
+     * Set nombre
      *
-     * @param integer $codProyecto
+     * @param string $nombre
      * @return Proyecto
      */
-    public function setCodProyecto($codProyecto)
+    public function setNombre($nombre)
     {
-        $this->codProyecto = $codProyecto;
+        $this->nombre = $nombre;
 
         return $this;
     }
 
     /**
-     * Get codProyecto
-     *
-     * @return integer 
-     */
-    public function getCodProyecto()
-    {
-        return $this->codProyecto;
-    }
-
-    /**
-     * Set nomProyecto
-     *
-     * @param string $nomProyecto
-     * @return Proyecto
-     */
-    public function setNomProyecto($nomProyecto)
-    {
-        $this->nomProyecto = $nomProyecto;
-
-        return $this;
-    }
-
-    /**
-     * Get nomProyecto
+     * Get nombre
      *
      * @return string 
      */
-    public function getNomProyecto()
+    public function getNombre()
     {
-        return $this->nomProyecto;
+        return $this->nombre;
     }
 
     /**
-     * Set fecInicio
+     * Set fechaInicio
      *
-     * @param \DateTime $fecInicio
+     * @param \DateTime $fechaInicio
      * @return Proyecto
      */
-    public function setFecInicio($fecInicio)
+    public function setFechaInicio($fechaInicio)
     {
-        $this->fecInicio = $fecInicio;
+        $this->fechaInicio = $fechaInicio;
 
         return $this;
     }
 
     /**
-     * Get fecInicio
+     * Get fechaInicio
      *
      * @return \DateTime 
      */
-    public function getFecInicio()
+    public function getFechaInicio()
     {
-        return $this->fecInicio;
+        return $this->fechaInicio;
     }
 
     /**
-     * Set fecFinal
+     * Set fechaFinal
      *
-     * @param \DateTime $fecFinal
+     * @param \DateTime $fechaFinal
      * @return Proyecto
      */
-    public function setFecFinal($fecFinal)
+    public function setFechaFinal($fechaFinal)
     {
-        $this->fecFinal = $fecFinal;
+        $this->fechaFinal = $fechaFinal;
 
         return $this;
     }
 
     /**
-     * Get fecFinal
+     * Get fechaFinal
      *
      * @return \DateTime 
      */
-    public function getFecFinal()
+    public function getFechaFinal()
     {
-        return $this->fecFinal;
+        return $this->fechaFinal;
     }
 
     /**
-     * Set descProyecto
+     * Set descripcion
      *
-     * @param string $descProyecto
+     * @param string $descripcion
      * @return Proyecto
      */
-    public function setDescProyecto($descProyecto)
+    public function setDescripcion($descripcion)
     {
-        $this->descProyecto = $descProyecto;
+        $this->descripcion = $descripcion;
 
         return $this;
     }
 
     /**
-     * Get descProyecto
+     * Get descripcion
      *
      * @return string 
      */
-    public function getDescProyecto()
+    public function getDescripcion()
     {
-        return $this->descProyecto;
+        return $this->descripcion;
     }
 
     /**
-     * Set objProyecto
+     * Set objetivos
      *
-     * @param string $objProyecto
+     * @param string $objetivos
      * @return Proyecto
      */
-    public function setObjProyecto($objProyecto)
+    public function setObjetivos($objetivos)
     {
-        $this->objProyecto = $objProyecto;
+        $this->objetivos = $objetivos;
 
         return $this;
     }
 
     /**
-     * Get objProyecto
+     * Get objetivos
      *
      * @return string 
      */
-    public function getObjProyecto()
+    public function getObjetivos()
     {
-        return $this->objProyecto;
+        return $this->objetivos;
     }
 
     /**
-     * Set estadoProyecto
+     * Set estado
      *
-     * @param string $estadoProyecto
+     * @param string $estado
      * @return Proyecto
      */
-    public function setEstadoProyecto($estadoProyecto)
+    public function setEstado($estado)
     {
-        $this->estadoProyecto = $estadoProyecto;
+        $this->estado = $estado;
 
         return $this;
     }
 
     /**
-     * Get estadoProyecto
+     * Get estado
      *
      * @return string 
      */
-    public function getEstadoProyecto()
+    public function getEstado()
     {
-        return $this->estadoProyecto;
+        return $this->estado;
+    }
+
+    /**
+     * Add hitos
+     *
+     * @param \Distrital\CecadBundle\Entity\Hito $hitos
+     * @return Proyecto
+     */
+    public function addHito(\Distrital\CecadBundle\Entity\Hito $hitos)
+    {
+        $this->hitos[] = $hitos;
+
+        return $this;
+    }
+
+    /**
+     * Remove hitos
+     *
+     * @param \Distrital\CecadBundle\Entity\Hito $hitos
+     */
+    public function removeHito(\Distrital\CecadBundle\Entity\Hito $hitos)
+    {
+        $this->hitos->removeElement($hitos);
+    }
+
+    /**
+     * Get hitos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getHitos()
+    {
+        return $this->hitos;
+    }
+
+    /**
+     * Add participantes
+     *
+     * @param \Distrital\CecadBundle\Entity\ParticipanteProyecto $participantes
+     * @return Proyecto
+     */
+    public function addParticipante(\Distrital\CecadBundle\Entity\ParticipanteProyecto $participantes)
+    {
+        $this->participantes[] = $participantes;
+
+        return $this;
+    }
+
+    /**
+     * Remove participantes
+     *
+     * @param \Distrital\CecadBundle\Entity\ParticipanteProyecto $participantes
+     */
+    public function removeParticipante(\Distrital\CecadBundle\Entity\ParticipanteProyecto $participantes)
+    {
+        $this->participantes->removeElement($participantes);
+    }
+
+    /**
+     * Get participantes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getParticipantes()
+    {
+        return $this->participantes;
     }
 }

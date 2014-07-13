@@ -138,4 +138,50 @@ class ProyectoAcceso
     {
         return $this->estadoProyAcc;
     }
+
+    /**
+     * Set acceso
+     *
+     * @param \Distrital\CecadBundle\Entity\Acceso $acceso
+     * @return ProyectoAcceso
+     */
+    public function setAcceso(\Distrital\CecadBundle\Entity\Acceso $acceso = null)
+    {
+        $this->acceso = $acceso;
+
+        return $this;
+    }
+
+    /**
+     * Get acceso
+     *
+     * @return \Distrital\CecadBundle\Entity\Acceso 
+     */
+    public function getAcceso()
+    {
+        return $this->acceso;
+    }
+
+    /**
+     * Set proyecto
+     *
+     * @param \Distrital\CecadBundle\Entity\Proyecto $proyecto
+     * @return ProyectoAcceso
+     */
+    public function setProyecto(\Distrital\CecadBundle\Entity\Proyecto $proyecto = null)
+    {
+        $this->proyecto = $proyecto;
+
+        return $this;
+    }
+
+    /**
+     * Get proyecto
+     *
+     * @return \Distrital\CecadBundle\Entity\Proyecto 
+     */
+    public function getProyecto()
+    {
+        return $this->proyecto;
+    }
 }
