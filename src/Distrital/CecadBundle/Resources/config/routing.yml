@@ -37,8 +37,10 @@ distrital_cecad_usuario:
     type: annotation
     prefix: /
 
-
-
+distrital_cecad_usuario_general:
+    resource: "@DistritalCecadBundle/Controller/UsuarioGeneralController.php"
+    type: annotation
+    prefix: /
 
 distrital_cecad_proyecto:
     resource: "@DistritalCecadBundle/Controller/ProyectoController.php"
