@@ -6,6 +6,10 @@
 	Apéllidos: {{usuario.apellido}}<br/>
 	Documento: {{usuario.cedula}}<br/>
 
+	<a href="{{ path('admin_usuario_edit', {'id':usuario.id}) }}">Actualizar datos basicos usuario</a>
+{#	<a href="{{ path('admin_estudiante_edit', {'id':usuario.id}) }}">Actualizar datos estudiante</a> #}
+
+
 	<div>
 		<h1>Resumen Proyectos</h1>
 		
@@ -29,6 +33,9 @@
 						</td>
 						<td>
 							{{participacion.rol}}
+						</td>
+						<td>
+							<a href="{{ path('usuario_proyecto_show', {'id':participacion.proyecto.id}) }}">Detalles</a>
 						</td>
 					</tr>
 				{% endfor %}
