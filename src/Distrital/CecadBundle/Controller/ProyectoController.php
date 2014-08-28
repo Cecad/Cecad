@@ -28,6 +28,13 @@ class ProyectoController extends Controller
      */
     public function indexAction()
     {
+    
+		$usuario = $this->getUser();
+
+		if (!isset($usuario)){
+			return $this->redirect($this->generateUrl('distrital_cecad_homepage'));
+		}
+		
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('DistritalCecadBundle:Proyecto')->findAll();
@@ -45,6 +52,12 @@ class ProyectoController extends Controller
      */
     public function createAction(Request $request)
     {
+		$usuario = $this->getUser();
+
+		if (!isset($usuario)){
+			return $this->redirect($this->generateUrl('distrital_cecad_homepage'));
+		}
+		
         $entity = new Proyecto();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
