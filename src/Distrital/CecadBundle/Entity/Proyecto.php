@@ -37,6 +37,13 @@ class Proyecto
     private $nombre;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="presupuesto", type="integer")
+     */
+    private $presupuesto;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="fechaInicio", type="datetime")
@@ -305,5 +312,28 @@ class Proyecto
     public function getParticipantes()
     {
         return $this->participantes;
+    }
+
+    /**
+     * Set presupuesto
+     *
+     * @param integer $presupuesto
+     * @return Proyecto
+     */
+    public function setPresupuesto($presupuesto)
+    {
+        $this->presupuesto = $presupuesto;
+
+        return $this;
+    }
+
+    /**
+     * Get presupuesto
+     *
+     * @return integer 
+     */
+    public function getPresupuesto()
+    {
+        return $this->presupuesto;
     }
 }
