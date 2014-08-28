@@ -16,6 +16,7 @@ class ProyectoType extends AbstractType
     {
         $builder
             ->add('nombre')
+            ->add('presupuesto', 'money', array("label"=>"Presupuesto  $","currency"=>"COP"))
             ->add('fechaInicio')
             ->add('fechaFinal')
             ->add('descripcion', 'textarea', array('label' => 'Descripción'))
