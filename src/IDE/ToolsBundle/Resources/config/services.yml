@@ -1,0 +1,7 @@
+parameters:
+#    ide_tools.example.class: IDE\ToolsBundle\Example
+
+services:
+#    ide_tools.example:
+#        class: %ide_tools.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
