@@ -1,7 +1,33 @@
 parameters:
-#    distrital_cecad.example.class: Distrital\CecadBundle\Example
+     ide_tools.twig.asset_exists_extension.class: IDE\ToolsBundle\Twig\Extension\AssetExistsExtension
+     ide_tools.twig.numeros_extension.class: IDE\ToolsBundle\Twig\Extension\NumerosExtension
+     ide_tools.twig.forms_extension.class: IDE\ToolsBundle\Twig\Extension\FormsExtension
+     ide_tools.twig.visualizacion_extension.class: IDE\ToolsBundle\Twig\Extension\VisualizacionExtension
 
 services:
-#    distrital_cecad.example:
-#        class: %distrital_cecad.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    ide_tools.twig.asset_exists_extension:
+        class: '%ide_tools.twig.asset_exists_extension.class%'
+        arguments: ['@kernel']
+        tags:
+          - { name: twig.extension }
+          
+    ide_tools.twig.numeros_extension:
+        class: '%ide_tools.twig.numeros_extension.class%'
+        arguments: ['@kernel']
+        tags:
+          - { name: twig.extension }
+
+    ide_tools.twig.forms_extension:
+        class: '%ide_tools.twig.forms_extension.class%'
+        arguments: ['@kernel']
+        tags:
+          - { name: twig.extension }
+
+    ide_tools.twig.visualizacion_extension:
+        class: '%ide_tools.twig.visualizacion_extension.class%'
+        arguments: ['@kernel']
+        tags:
+          - { name: twig.extension }
+
+
+

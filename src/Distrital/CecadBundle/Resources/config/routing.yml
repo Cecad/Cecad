@@ -1,3 +1,7 @@
+ide_tools:
+    resource: "@IDEToolsBundle/Resources/config/routing.yml"
+    prefix: /
+
 
 login:
     pattern: /login
