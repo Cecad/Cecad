@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Proyecto</h1>
+    <h1>Datos del Proyecto</h1>
 
     <table class="record_properties">
         <tbody>
@@ -14,39 +14,93 @@
                 <td>{{ entity.nombre }}</td>
             </tr>
             <tr>
-                <th>Fechainicio</th>
-                <td>{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Fechafinal</th>
-                <td>{{ entity.fechaFinal|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Descripcion</th>
-                <td>{{ entity.descripcion }}</td>
-            </tr>
-            <tr>
-                <th>Objetivos</th>
+                <th>Objetivo del proyecto</th>
                 <td>{{ entity.objetivos }}</td>
+            </tr>
+            <tr>
+                <th>Descripción del proyecto</th>
+                <td>{{ entity.descripcion }}</td>
             </tr>
             <tr>
                 <th>Estado</th>
                 <td>{{ entity.estado }}</td>
             </tr>
+            <tr>
+                <th>Integrantes</th>
+                <td>* ToDo *: FALTA MOSTRAR LOS INTEGRANTES</td>
+            </tr>
         </tbody>
     </table>
+    
+    
+    <h1>Aportes</h1>
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Fecha Inicio</th>
+                <td>{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fecha Final</th>
+                <td>{{ entity.fechaFinal|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Entregables por calendario</th>
+                <td>* ToDo *</td>
+         	</tr>
+            <tr>
+                <th>Adjuntar</th>
+                <td>* ToDo *</td>
+            </tr>
+		</tbody>
+    </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('usuario_proyecto') }}">
-            Volver a la lista detallada
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('usuario_proyecto_edit', { 'id': entity.id }) }}">
-            Editar
-        </a>
-    </li>
+    <h1>Software</h1>
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Maquina virtual</th>
+                <td>* ToDo *</td>
+         	</tr>
+            <tr>
+                <th>Sistema operativo</th>
+                <td>* ToDo *</td>
+            </tr>
+            <tr>
+                <th>Programas instalados</th>
+                <td>* ToDo *</td>
+            </tr>
+            <tr>
+                <th>Tiempo utilización</th>
+                <td>* ToDo *</td>
+            </tr>
+            <tr>
+                <th>Costo operación</th>
+                <td>* ToDo *</td>
+            </tr>
+            <tr>
+                <th>Lugar operación</th>
+                <td>* ToDo *</td>
+            </tr>
+		</tbody>
+    </table>
+
+
+
+
+
+
+    <ul class="record_actions">
+		<li>
+		    <a href="{{ path('usuario_proyecto') }}">
+		        Volver a la lista detallada
+		    </a>
+		</li>
+		<li>
+		    <a href="{{ path('usuario_proyecto_edit', { 'id': entity.id }) }}">
+		        Editar
+		    </a>
+		</li>
     <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}
