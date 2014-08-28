@@ -6,11 +6,9 @@
 	{% endif %}
 	<h1>Ingreso de usuario</h1>
 	<form action="{{ path('login_check') }}" method="post">
-		<label for="username">Cedula:</label>
-		<input type="text" id="username" name="_username" value="{{ last_username }}" />
-		<label for="password">Clave:</label>
 
-		<input type="password" id="password" name="_password" />
+		{{ f_entrada("username", "_username", "text", "Cedula", "required")|raw}}
+		{{ f_entrada("password", "_password", "password", "Clave", "required")|raw}}
 		{#
 			If you want to control the URL the user
 			is redirected to on success (more details below)
