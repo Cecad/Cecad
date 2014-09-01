@@ -20,6 +20,34 @@ class ProyectoController extends Controller
 {
 
     /**
+     * Lista todos los proyectos terminados.
+     *
+     * @Route("/", name="proyecto_terminados")
+     * @Method("GET")
+     * @Template()
+     */
+    public function proyectosTerminadosAction()
+    {
+    
+		$usuario = $this->getUser();
+
+		if (!isset($usuario)){
+			return $this->redirect($this->generateUrl('distrital_cecad_homepage'));
+		}
+		
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('DistritalCecadBundle:Proyecto')->findByEstado("T");
+
+        return $this->render('DistritalCecadBundle:Proyecto:terminados.html.twig', 
+		   	array(
+		        'entities' => $entities,
+		    ));
+    }
+
+
+
+    /**
      * Lists all Proyecto entities.
      *
      * @Route("/", name="usuario_proyecto")
@@ -136,15 +164,20 @@ class ProyectoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DistritalCecadBundle:Proyecto')->find($id);
+        $r_core = $em->getRepository('DistritalCecadBundle:Core');
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Proyecto entity.');
         }
 
+		
         $deleteForm = $this->createDeleteForm($id);
+		$cores = $r_core->findByProyecto($entity);
+
 
         return array(
             'entity'      => $entity,
+            'cores'      => $cores,
             'delete_form' => $deleteForm->createView(),
         );
     }
