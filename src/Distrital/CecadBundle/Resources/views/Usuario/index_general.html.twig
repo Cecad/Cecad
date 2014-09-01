@@ -2,16 +2,17 @@
 
 {% block body -%}
 	<h1>Datos del usuario</h1>
-	Nombres: {{usuario.nombre}}<br/>
-	Apéllidos: {{usuario.apellido}}<br/>
-	Documento: {{usuario.cedula}}<br/>
+	{{usuario.nombre}} {{usuario.apellido}} - {{usuario.cedula}}<br/>
 
-	<a href="{{ path('admin_usuario_edit', {'id':usuario.id}) }}">Actualizar datos basicos usuario</a>
+{#	<a class="btn btn-default" href="{{ path('admin_usuario_edit', {'id':usuario.id}) }}">Actualizar datos basicos usuario</a> #}
+	<a class="btn btn-default" href="{{ path('usuario_miPerfil') }}">Mi perfil</a>
+	<a class="btn btn-default" href="{{ path('proyecto_terminados') }}">Bibloteca</a>
+	<a class="btn btn-default" href="{{ path('logout') }}">Salir</a>
 {#	<a href="{{ path('admin_estudiante_edit', {'id':usuario.id}) }}">Actualizar datos estudiante</a> #}
 
 
 	<div>
-		<h1>Resumen Proyectos</h1>
+		<h1>Mis Proyectos</h1>
 		
 		<table>
 			<thead>
