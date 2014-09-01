@@ -50,3 +50,14 @@ distrital_cecad_proyecto:
     resource: "@DistritalCecadBundle/Controller/ProyectoController.php"
     type: annotation
     prefix: /
+
+distrital_cecad_core:
+    resource: "@DistritalCecadBundle/Controller/CoreController.php"
+    type: annotation
+    prefix: /
+
+distrital_cecad_paquete:
+    resource: "@DistritalCecadBundle/Controller/PaqueteController.php"
+    type: annotation
+    prefix: /
+
