@@ -51,4 +51,80 @@ class UsuarioGeneralController extends Controller
         			'participaciones'=>$participaciones,
         		));
     }
+    
+    
+	/**
+	* Mi perfil action
+	*
+	* @Route("/", name="usuario_miPerfil")
+	* @Method("GET")
+	* @Template()
+	*/
+    public function miPerfilAction()
+    {
+		$em = $this->getDoctrine()->getManager();
+
+		$usuario = $this->getUser();
+
+		$id = 0;
+		if (!isset($usuario)){
+			return $this->redirect($this->generateUrl('distrital_cecad_homepage'));
+		}
+
+
+
+
+        return $this->render('DistritalCecadBundle:Usuario:miPerfil.html.twig', 
+        		array(
+					'usuario'=>$usuario,
+        		));
+    }
+
+
+
+
+	
+
+	/**
+	* Agregar integrante
+	*
+	* @Route("/", name="usuario_agregar_integrante")
+	* @Method({"GET", "POST"})
+	* @Template()
+	*/
+    public function agregarIntegranteAction()
+    {
+		$em = $this->getDoctrine()->getManager();
+
+		$usuario = $this->getUser();
+
+		$id = 0;
+		if (!isset($usuario)){
+			return $this->redirect($this->generateUrl('distrital_cecad_homepage'));
+		}
+
+
+
+
+        return $this->render('DistritalCecadBundle:Usuario:miPerfil.html.twig', 
+        		array(
+					'usuario'=>$usuario,
+        		));
+    }
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
