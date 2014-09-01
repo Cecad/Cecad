@@ -53,6 +53,35 @@ class LoadUsuarioData extends AbstractFixture implements FixtureInterface, Order
     	
 		$manager->persist($usuario);
 		$manager->flush();
+		
+		
+    	$usuario = new Usuario();
+    	$usuario->setCedula(1023887190);
+    	$usuario->setClave($password);
+    	$usuario->setNombre("Julio");
+    	$usuario->setApellido("Pinzon");
+    	$usuario->setCorreo("julio@pinzon.com");
+    	$usuario->setCelular(123456789);
+    	$usuario->setTelefono(123456789);
+    	$usuario->setProfesion("Ingeniero");
+    	$usuario->setEstado("A");
+		$manager->persist($usuario);
+		$manager->flush();
+		
+		
+    	$usuario = new Usuario();
+    	$usuario->setCedula(1026260827);
+    	$usuario->setClave($password);
+    	$usuario->setNombre("Hectot");
+    	$usuario->setApellido("Dussan");
+    	$usuario->setCorreo("hector@dussan.com");
+    	$usuario->setCelular(123456789);
+    	$usuario->setTelefono(123456789);
+    	$usuario->setProfesion("Ingeniero");
+    	$usuario->setEstado("A");
+		$manager->persist($usuario);
+		$manager->flush();
+		
 
 	  
     }
