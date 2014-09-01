@@ -6,3 +6,22 @@ table th{
 	padding:10px;
 	border: 1px solid gray;
 }
+
+.formularioDatos > form > div > div {
+	min-height: 40px;
+	overflow:hidden;
+}
+.formularioDatos > form > div > div > label{
+	width: 200px;
+}
+
+#distrital_cecadbundle_proyecto_fechaInicio,
+#distrital_cecadbundle_proyecto_fechaFinal{
+	margin-left: 200px;
+}
+
+.formularioDatos > form > div > div > input,
+.formularioDatos > form > div > div > div{
+	width: 210px;
+
+}
