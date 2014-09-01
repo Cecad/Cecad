@@ -27,63 +27,71 @@
             </tr>
             <tr>
                 <th>Integrantes</th>
-                <td>* ToDo *: FALTA MOSTRAR LOS INTEGRANTES</td>
+                <td>
+                	<ol>
+				        {% for participante in entity.participantes %}
+				        	<li>{{ participante.rol }} - {{ participante.usuario.nombre }}</li>
+				        {% endfor %}
+                	<ol>
+                	<a class="btn btn-default" href="{{ path('usuario_agregar_integrante') }}">Agregar integrante</a>
+                </td>
             </tr>
         </tbody>
     </table>
     
+    {% if entity.estado=="A" %}
+		<h1>Aportes</h1>
+		<table class="record_properties">
+		    <tbody>
+		        <tr>
+		            <th>Fecha Inicio</th>
+		            <td>{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</td>
+		        </tr>
+		        <tr>
+		            <th>Fecha Final</th>
+		            <td>{{ entity.fechaFinal|date('Y-m-d H:i:s') }}</td>
+		        </tr>
+		        <tr>
+		            <th>Entregables por calendario</th>
+		            <td>* ToDo *</td>
+		     	</tr>
+		        <tr>
+		            <th>Adjuntar</th>
+		            <td>* ToDo *</td>
+		        </tr>
+			</tbody>
+		</table>
+	{% endif %}
+	
+	
+    <h1>Cores</h1>
     
-    <h1>Aportes</h1>
     <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Fecha Inicio</th>
-                <td>{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Fecha Final</th>
-                <td>{{ entity.fechaFinal|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Entregables por calendario</th>
-                <td>* ToDo *</td>
-         	</tr>
-            <tr>
-                <th>Adjuntar</th>
-                <td>* ToDo *</td>
-            </tr>
+    	<thead>
+		    <tr>
+		        <th>Estado</th>
+		        <th>Maquina virtual</th>
+		        <th>Sistema operativo</th>
+		        <th>Programas instalados</th>
+		        <th>Tiempo utilización</th>
+		        <th>Costo operación</th>
+		        <th>Acciones</th>
+		    </tr>
+		</thead>
+	    <tbody>
+		{% for core in cores %}
+		    <tr>
+		        <th>{{core.estado}}</th>
+		        <th>{{core.nombre}}</th>
+		        <th>{{core.sistemaOperativo}}</th>
+		        <th>{{core.programasInstalados}}</th>
+		        <th>{{core.tiempoSolicitado}}</th>
+		        <th>{{core.paquete.precio}}</th>
+		    </tr>
+		{% endfor %}
 		</tbody>
     </table>
-
-    <h1>Software</h1>
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Maquina virtual</th>
-                <td>* ToDo *</td>
-         	</tr>
-            <tr>
-                <th>Sistema operativo</th>
-                <td>* ToDo *</td>
-            </tr>
-            <tr>
-                <th>Programas instalados</th>
-                <td>* ToDo *</td>
-            </tr>
-            <tr>
-                <th>Tiempo utilización</th>
-                <td>* ToDo *</td>
-            </tr>
-            <tr>
-                <th>Costo operación</th>
-                <td>* ToDo *</td>
-            </tr>
-            <tr>
-                <th>Lugar operación</th>
-                <td>* ToDo *</td>
-            </tr>
-		</tbody>
-    </table>
+    <a class="btn btn-default" href="{{path('core_new', {id:entity.id}) }}">Solicitar core para el proyecto</a>
 
 
 
@@ -92,7 +100,7 @@
 
     <ul class="record_actions">
 		<li>
-		    <a href="{{ path('usuario_proyecto') }}">
+		    <a href="{{ path('usuario_index') }}">
 		        Volver a la lista detallada
 		    </a>
 		</li>

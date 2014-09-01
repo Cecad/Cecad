@@ -1,0 +1,58 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Lista de Proyectos Terminados</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Fechainicio</th>
+                <th>Fechafinal</th>
+                <th>Descripción</th>
+                <th>Objetivos</th>
+                <th>Estado</th>
+                <th>Participantes</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+	        {% set imprimir = false %}
+	        {% for participante in entity.participantes %}
+        	 	{% if participante.usuario == app.user %}
+        	 		{% set imprimir = true %}
+        	 	{% endif %}
+        	{% endfor %}
+    	 	{% if imprimir %}
+		        <tr>
+		            <td><a href="{{ path('usuario_proyecto_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+		            <td>{{ entity.nombre }}</td>
+		            <td>{% if entity.fechaInicio %}{{ entity.fechaInicio|date('Y-m-d H:i:s') }}{% endif %}</td>
+		            <td>{% if entity.fechaFinal %}{{ entity.fechaFinal|date('Y-m-d H:i:s') }}{% endif %}</td>
+		            <td>{{ entity.descripcion }}</td>
+		            <td>{{ entity.objetivos }}</td>
+		            <td>{{ entity.estado }}</td>
+		            <td>
+		            	{% for participante in entity.participantes %}
+		            		{{participante.rol}} -
+		            	 	{{participante.usuario.nombre}} {{participante.usuario.apellido}}<br>
+		            	{% endfor %}
+		            	
+		            	
+		            </td>
+		            <td>
+		            <ul>
+		                <li>
+		                    <a href="{{ path('usuario_proyecto_show', { 'id': entity.id }) }}">Detalles</a>
+		                </li>
+		            </ul>
+		            </td>
+		        </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}
