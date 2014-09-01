@@ -90,6 +90,9 @@ class Proyecto
 	protected $GrupoInvestigacion;
 	*/
 
+	public function __toString(){
+		return $this->nombre;
+	}
 
     /**
      * Constructor

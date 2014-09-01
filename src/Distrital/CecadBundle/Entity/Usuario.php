@@ -155,6 +155,9 @@ class Usuario implements UserInterface
         return true;
     }
 
+	public function __toString(){
+		return $this->nombre;
+	}
 
 
 
