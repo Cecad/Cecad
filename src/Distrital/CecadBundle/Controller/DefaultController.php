@@ -19,7 +19,15 @@ class DefaultController extends Controller
 		$usuario = $this->getUser();
 
 		if (isset($usuario)){
-			return $this->redirect($this->generateUrl('usuario_index'));
+			switch($usuario->getEstado()){
+				case "A":
+					return $this->redirect($this->generateUrl('usuario_index'));
+				case "D":
+					return $this->redirect($this->generateUrl('docente_index'));
+				case "X":
+					return $this->redirect($this->generateUrl('administrador_index'));
+			}
+			
 		}
 		
         return $this->render('DistritalCecadBundle:Default:index.html.twig', 
