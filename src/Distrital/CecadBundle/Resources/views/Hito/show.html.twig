@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Hito</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Entregahito</th>
+                <td>{{ entity.entregaHito }}</td>
+            </tr>
+            <tr>
+                <th>Nombreentrega</th>
+                <td>{{ entity.nombreEntrega }}</td>
+            </tr>
+            <tr>
+                <th>Fechainicio</th>
+                <td>{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fechaentrega</th>
+                <td>{{ entity.fechaEntrega|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Calificacionhito</th>
+                <td>{{ entity.calificacionHito }}</td>
+            </tr>
+            <tr>
+                <th>Estadohito</th>
+                <td>{{ entity.estadoHito }}</td>
+            </tr>
+            <tr>
+                <th>Correciones</th>
+                <td>{{ entity.correciones }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('hito') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('hito_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
