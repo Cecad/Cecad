@@ -49,10 +49,26 @@ class LoadUsuarioData extends AbstractFixture implements FixtureInterface, Order
     	$usuario->setCelular(123456789);
     	$usuario->setTelefono(123456789);
     	$usuario->setProfesion("Ingeniero");
-    	$usuario->setEstado("A");
-    	
+    	$usuario->setEstado("X");   // Administrador
 		$manager->persist($usuario);
 		$manager->flush();
+		$this->addReference('usuario_1', $usuario);
+		
+		
+    	$usuario = new Usuario();
+    	$usuario->setCedula(1026260827);
+    	$usuario->setClave($password);
+    	$usuario->setNombre("Hector");
+    	$usuario->setApellido("Dussan");
+    	$usuario->setCorreo("hector@dussan.com");
+    	$usuario->setCelular(123456789);
+    	$usuario->setTelefono(123456789);
+    	$usuario->setProfesion("Ingeniero");
+    	$usuario->setEstado("D");   //// Docente
+		$manager->persist($usuario);
+		$manager->flush();
+		$this->addReference('usuario_2', $usuario);
+		
 		
 		
     	$usuario = new Usuario();
@@ -64,23 +80,12 @@ class LoadUsuarioData extends AbstractFixture implements FixtureInterface, Order
     	$usuario->setCelular(123456789);
     	$usuario->setTelefono(123456789);
     	$usuario->setProfesion("Ingeniero");
-    	$usuario->setEstado("A");
+    	$usuario->setEstado("A");   /// Estudiante
 		$manager->persist($usuario);
 		$manager->flush();
+		$this->addReference('usuario_3', $usuario);
+	
 		
-		
-    	$usuario = new Usuario();
-    	$usuario->setCedula(1026260827);
-    	$usuario->setClave($password);
-    	$usuario->setNombre("Hectot");
-    	$usuario->setApellido("Dussan");
-    	$usuario->setCorreo("hector@dussan.com");
-    	$usuario->setCelular(123456789);
-    	$usuario->setTelefono(123456789);
-    	$usuario->setProfesion("Ingeniero");
-    	$usuario->setEstado("A");
-		$manager->persist($usuario);
-		$manager->flush();
 		
 
 	  
