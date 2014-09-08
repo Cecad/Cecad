@@ -61,3 +61,13 @@ distrital_cecad_paquete:
     type: annotation
     prefix: /
 
+distrital_cecad_docente:
+    resource: "@DistritalCecadBundle/Controller/DocenteController.php"
+    type: annotation
+    prefix: /
+
+distrital_cecad_hito:
+    resource: "@DistritalCecadBundle/Controller/HitoController.php"
+    type: annotation
+    prefix: /
+
