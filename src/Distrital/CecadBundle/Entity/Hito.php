@@ -25,56 +25,48 @@ class Hito
 	* @ORM\ManyToOne(targetEntity="Proyecto")
 	* @ORM\JoinColumn(name="idProyecto", referencedColumnName="id")
 	*/	
-	 protected $proyecto;
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="cod_hito", type="integer")
-     */
-	 
-	
+	protected $proyecto;
 
-    private $codHito;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="entrega_hito", type="integer")
+     * @ORM\Column(name="entregaHito", type="string", length=255)
      */
     private $entregaHito;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre_entrega", type="string", length=255)
+     * @ORM\Column(name="nombreEntrega", type="string", length=255)
      */
     private $nombreEntrega;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fec_inicio", type="datetime")
+     * @ORM\Column(name="fechaInicio", type="datetime")
      */
-    private $fecInicio;
+    private $fechaInicio;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fec_entrega", type="datetime")
+     * @ORM\Column(name="fechaEntrega", type="datetime")
      */
-    private $fecEntrega;
+    private $fechaEntrega;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="calificacion_hito", type="float")
+     * @ORM\Column(name="calificacionHito", type="float")
      */
     private $calificacionHito;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="estado_hito", type="string", length=1)
+     * @ORM\Column(name="estadoHito", type="string", length=1)
      */
     private $estadoHito;
 
@@ -84,6 +76,7 @@ class Hito
      * @ORM\Column(name="correciones", type="text")
      */
     private $correciones;
+
 
 
     /**
@@ -97,32 +90,9 @@ class Hito
     }
 
     /**
-     * Set codHito
-     *
-     * @param integer $codHito
-     * @return Hito
-     */
-    public function setCodHito($codHito)
-    {
-        $this->codHito = $codHito;
-
-        return $this;
-    }
-
-    /**
-     * Get codHito
-     *
-     * @return integer 
-     */
-    public function getCodHito()
-    {
-        return $this->codHito;
-    }
-
-    /**
      * Set entregaHito
      *
-     * @param integer $entregaHito
+     * @param string $entregaHito
      * @return Hito
      */
     public function setEntregaHito($entregaHito)
@@ -135,7 +105,7 @@ class Hito
     /**
      * Get entregaHito
      *
-     * @return integer 
+     * @return string 
      */
     public function getEntregaHito()
     {
@@ -166,49 +136,49 @@ class Hito
     }
 
     /**
-     * Set fecInicio
+     * Set fechaInicio
      *
-     * @param \DateTime $fecInicio
+     * @param \DateTime $fechaInicio
      * @return Hito
      */
-    public function setFecInicio($fecInicio)
+    public function setFechaInicio($fechaInicio)
     {
-        $this->fecInicio = $fecInicio;
+        $this->fechaInicio = $fechaInicio;
 
         return $this;
     }
 
     /**
-     * Get fecInicio
+     * Get fechaInicio
      *
      * @return \DateTime 
      */
-    public function getFecInicio()
+    public function getFechaInicio()
     {
-        return $this->fecInicio;
+        return $this->fechaInicio;
     }
 
     /**
-     * Set fecEntrega
+     * Set fechaEntrega
      *
-     * @param \DateTime $fecEntrega
+     * @param \DateTime $fechaEntrega
      * @return Hito
      */
-    public function setFecEntrega($fecEntrega)
+    public function setFechaEntrega($fechaEntrega)
     {
-        $this->fecEntrega = $fecEntrega;
+        $this->fechaEntrega = $fechaEntrega;
 
         return $this;
     }
 
     /**
-     * Get fecEntrega
+     * Get fechaEntrega
      *
      * @return \DateTime 
      */
-    public function getFecEntrega()
+    public function getFechaEntrega()
     {
-        return $this->fecEntrega;
+        return $this->fechaEntrega;
     }
 
     /**
