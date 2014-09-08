@@ -36,6 +36,7 @@ class LoadParticipanteProyectoData extends AbstractFixture implements FixtureInt
 		$usuario3 = $this->getReference('usuario_3');
 		$proyecto1 = $this->getReference('proyecto_1');
 		$proyecto2 = $this->getReference('proyecto_2');
+		$proyecto3 = $this->getReference('proyecto_3');
     
     	$participanteProyecto = new ParticipanteProyecto();
 		$participanteProyecto->setProyecto($proyecto1);
