@@ -8,25 +8,61 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Distrital\CecadBundle\Entity\Proyecto;
-use Distrital\CecadBundle\Form\ProyectoAdministracionType;
+use Distrital\CecadBundle\Entity\ParticipanteProyecto;
+use Distrital\CecadBundle\Form\ProyectoType;
 
 /**
  * Proyecto controller.
  *
- * @Route("/administracion/proyecto")
+ * @Route("/usuario/proyecto")
  */
-class ProyectoController extends Controller
+class ProyectoGeneralController extends Controller
 {
+
+    /**
+     * Lista todos los proyectos terminados.
+     *
+     * @Route("/", name="proyecto_terminados")
+     * @Method("GET")
+     * @Template()
+     */
+    public function proyectosTerminadosAction()
+    {
+    
+		$usuario = $this->getUser();
+
+		if (!isset($usuario)){
+			return $this->redirect($this->generateUrl('distrital_cecad_homepage'));
+		}
+		
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('DistritalCecadBundle:Proyecto')->findByEstado("T");
+
+        return $this->render('DistritalCecadBundle:Proyecto:terminados.html.twig', 
+		   	array(
+		        'entities' => $entities,
+		    ));
+    }
+
+
 
     /**
      * Lists all Proyecto entities.
      *
-     * @Route("/", name="administracion_proyecto")
+     * @Route("/", name="usuario_proyecto")
      * @Method("GET")
      * @Template()
      */
     public function indexAction()
     {
+    
+		$usuario = $this->getUser();
+
+		if (!isset($usuario)){
+			return $this->redirect($this->generateUrl('distrital_cecad_homepage'));
+		}
+		
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('DistritalCecadBundle:Proyecto')->findAll();
@@ -38,22 +74,39 @@ class ProyectoController extends Controller
     /**
      * Creates a new Proyecto entity.
      *
-     * @Route("/", name="administracion_proyecto_create")
+     * @Route("/", name="usuario_proyecto_create")
      * @Method("POST")
      * @Template("DistritalCecadBundle:Proyecto:new.html.twig")
      */
     public function createAction(Request $request)
     {
+		$usuario = $this->getUser();
+
+		if (!isset($usuario)){
+			return $this->redirect($this->generateUrl('distrital_cecad_homepage'));
+		}
+		
         $entity = new Proyecto();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $entity->setEstado('P');
             $em->persist($entity);
             $em->flush();
+            
+            $usuario = $this->getUser();
+            
+            $pp = new ParticipanteProyecto();
+            $pp->setProyecto($entity);
+            $pp->setUsuario($usuario);
+            $pp->setRol("Dueño");
+            $em->persist($pp);
+            $em->flush();
+            
 
-            return $this->redirect($this->generateUrl('administracion_proyecto_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('usuario_proyecto_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,20 +116,20 @@ class ProyectoController extends Controller
     }
 
     /**
-     * Creates a form to create a Proyecto entity.
-     *
-     * @param Proyecto $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
+    * Creates a form to create a Proyecto entity.
+    *
+    * @param Proyecto $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
     private function createCreateForm(Proyecto $entity)
     {
-        $form = $this->createForm(new ProyectoAdministracionType(), $entity, array(
-            'action' => $this->generateUrl('administracion_proyecto_create'),
+        $form = $this->createForm(new ProyectoType(), $entity, array(
+            'action' => $this->generateUrl('usuario_proyecto_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Registrar'));
 
         return $form;
     }
@@ -84,7 +137,7 @@ class ProyectoController extends Controller
     /**
      * Displays a form to create a new Proyecto entity.
      *
-     * @Route("/new", name="administracion_proyecto_new")
+     * @Route("/new", name="usuario_proyecto_new")
      * @Method("GET")
      * @Template()
      */
@@ -102,7 +155,7 @@ class ProyectoController extends Controller
     /**
      * Finds and displays a Proyecto entity.
      *
-     * @Route("/{id}", name="administracion_proyecto_show")
+     * @Route("/{id}", name="usuario_proyecto_show")
      * @Method("GET")
      * @Template()
      */
@@ -111,15 +164,20 @@ class ProyectoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DistritalCecadBundle:Proyecto')->find($id);
+        $r_core = $em->getRepository('DistritalCecadBundle:Core');
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Proyecto entity.');
         }
 
+		
         $deleteForm = $this->createDeleteForm($id);
+		$cores = $r_core->findByProyecto($entity);
+
 
         return array(
             'entity'      => $entity,
+            'cores'      => $cores,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -127,7 +185,7 @@ class ProyectoController extends Controller
     /**
      * Displays a form to edit an existing Proyecto entity.
      *
-     * @Route("/{id}/edit", name="administracion_proyecto_edit")
+     * @Route("/{id}/edit", name="usuario_proyecto_edit")
      * @Method("GET")
      * @Template()
      */
@@ -160,19 +218,19 @@ class ProyectoController extends Controller
     */
     private function createEditForm(Proyecto $entity)
     {
-        $form = $this->createForm(new ProyectoAdministracionType(), $entity, array(
-            'action' => $this->generateUrl('administracion_proyecto_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new ProyectoType(), $entity, array(
+            'action' => $this->generateUrl('usuario_proyecto_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Actualizar'));
 
         return $form;
     }
     /**
      * Edits an existing Proyecto entity.
      *
-     * @Route("/{id}", name="administracion_proyecto_update")
+     * @Route("/{id}", name="usuario_proyecto_update")
      * @Method("PUT")
      * @Template("DistritalCecadBundle:Proyecto:edit.html.twig")
      */
@@ -193,7 +251,7 @@ class ProyectoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('administracion_proyecto_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('usuario_proyecto_edit', array('id' => $id)));
         }
 
         return array(
@@ -205,7 +263,7 @@ class ProyectoController extends Controller
     /**
      * Deletes a Proyecto entity.
      *
-     * @Route("/{id}", name="administracion_proyecto_delete")
+     * @Route("/{id}", name="usuario_proyecto_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -220,12 +278,12 @@ class ProyectoController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Proyecto entity.');
             }
-
-            $em->remove($entity);
+			$entity->setEstado("I");
+            $em->persist($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('administracion_proyecto'));
+        return $this->redirect($this->generateUrl('usuario_proyecto'));
     }
 
     /**
@@ -238,9 +296,9 @@ class ProyectoController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('administracion_proyecto_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('usuario_proyecto_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Cancelar proyecto'))
             ->getForm()
         ;
     }

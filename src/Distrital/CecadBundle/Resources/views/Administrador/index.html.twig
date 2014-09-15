@@ -1,6 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+
+
+<a class="btn btn-default" href="{{ path('administracion_usuario') }}">Administrar Usuarios</a>
+<a class="btn btn-default" href="{{ path('administracion_proyecto') }}">Administrar Proyectos</a>
     <h1>Lista de Proyectos modo administración</h1>
 
     <table class="records_list">

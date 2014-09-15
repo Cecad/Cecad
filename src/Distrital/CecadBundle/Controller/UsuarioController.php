@@ -8,12 +8,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Distrital\CecadBundle\Entity\Usuario;
-use Distrital\CecadBundle\Form\UsuarioType;
+use Distrital\CecadBundle\Form\UsuarioAdministracionType;
 
 /**
  * Usuario controller.
  *
- * @Route("/admin/usuario")
+ * @Route("/administracion/usuario")
  */
 class UsuarioController extends Controller
 {
@@ -21,7 +21,7 @@ class UsuarioController extends Controller
     /**
      * Lists all Usuario entities.
      *
-     * @Route("/", name="admin_usuario")
+     * @Route("/", name="administracion_usuario")
      * @Method("GET")
      * @Template()
      */
@@ -38,7 +38,7 @@ class UsuarioController extends Controller
     /**
      * Creates a new Usuario entity.
      *
-     * @Route("/", name="admin_usuario_create")
+     * @Route("/", name="administracion_usuario_create")
      * @Method("POST")
      * @Template("DistritalCecadBundle:Usuario:new.html.twig")
      */
@@ -53,7 +53,7 @@ class UsuarioController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_usuario_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('administracion_usuario_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +63,16 @@ class UsuarioController extends Controller
     }
 
     /**
-    * Creates a form to create a Usuario entity.
-    *
-    * @param Usuario $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Usuario entity.
+     *
+     * @param Usuario $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(Usuario $entity)
     {
-        $form = $this->createForm(new UsuarioType(), $entity, array(
-            'action' => $this->generateUrl('admin_usuario_create'),
+        $form = $this->createForm(new UsuarioAdministracionType(), $entity, array(
+            'action' => $this->generateUrl('administracion_usuario_create'),
             'method' => 'POST',
         ));
 
@@ -84,7 +84,7 @@ class UsuarioController extends Controller
     /**
      * Displays a form to create a new Usuario entity.
      *
-     * @Route("/new", name="admin_usuario_new")
+     * @Route("/new", name="administracion_usuario_new")
      * @Method("GET")
      * @Template()
      */
@@ -102,7 +102,7 @@ class UsuarioController extends Controller
     /**
      * Finds and displays a Usuario entity.
      *
-     * @Route("/{id}", name="admin_usuario_show")
+     * @Route("/{id}", name="administracion_usuario_show")
      * @Method("GET")
      * @Template()
      */
@@ -127,7 +127,7 @@ class UsuarioController extends Controller
     /**
      * Displays a form to edit an existing Usuario entity.
      *
-     * @Route("/{id}/edit", name="admin_usuario_edit")
+     * @Route("/{id}/edit", name="administracion_usuario_edit")
      * @Method("GET")
      * @Template()
      */
@@ -160,8 +160,8 @@ class UsuarioController extends Controller
     */
     private function createEditForm(Usuario $entity)
     {
-        $form = $this->createForm(new UsuarioType(), $entity, array(
-            'action' => $this->generateUrl('admin_usuario_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new UsuarioAdministracionType(), $entity, array(
+            'action' => $this->generateUrl('administracion_usuario_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,7 +172,7 @@ class UsuarioController extends Controller
     /**
      * Edits an existing Usuario entity.
      *
-     * @Route("/{id}", name="admin_usuario_update")
+     * @Route("/{id}", name="administracion_usuario_update")
      * @Method("PUT")
      * @Template("DistritalCecadBundle:Usuario:edit.html.twig")
      */
@@ -193,7 +193,7 @@ class UsuarioController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_usuario_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('administracion_usuario_edit', array('id' => $id)));
         }
 
         return array(
@@ -205,7 +205,7 @@ class UsuarioController extends Controller
     /**
      * Deletes a Usuario entity.
      *
-     * @Route("/{id}", name="admin_usuario_delete")
+     * @Route("/{id}", name="administracion_usuario_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -225,7 +225,7 @@ class UsuarioController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('admin_usuario'));
+        return $this->redirect($this->generateUrl('administracion_usuario'));
     }
 
     /**
@@ -238,7 +238,7 @@ class UsuarioController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_usuario_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('administracion_usuario_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

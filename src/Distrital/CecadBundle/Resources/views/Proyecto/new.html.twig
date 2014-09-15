@@ -3,14 +3,12 @@
 {% block body -%}
     <h1>Proyecto creation</h1>
 
-	<div class="formularioDatos">
     {{ form(form) }}
-	</div>
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('usuario_proyecto') }}">
-            Volver a la lista detallada
+        <a href="{{ path('administracion_proyecto') }}">
+            Back to the list
         </a>
     </li>
 </ul>

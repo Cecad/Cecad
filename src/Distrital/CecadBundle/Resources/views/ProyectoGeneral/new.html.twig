@@ -1,14 +1,16 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Usuario creation</h1>
+    <h1>Proyecto creation</h1>
 
+	<div class="formularioDatos">
     {{ form(form) }}
+	</div>
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('administracion_usuario') }}">
-            Back to the list
+        <a href="{{ path('usuario_proyecto') }}">
+            Volver a la lista detallada
         </a>
     </li>
 </ul>

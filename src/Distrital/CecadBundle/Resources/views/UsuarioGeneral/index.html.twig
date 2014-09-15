@@ -1,0 +1,48 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+
+	{% if usuario is defined %}
+	
+		<h1>Datos del usuario</h1>
+		Nombres: {{usuario.nombre}}<br/>
+		Apéllidos: {{usuario.apellido}}<br/>
+		Documento: {{usuario.cedula}}<br/>
+	{% endif %}
+	<div>
+		<h1>Resumen Proyectos</h1>
+		
+		<table>
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Nombre</th>
+					<th>Rol</th>
+				</tr>
+			</thead>
+		
+			<tbody>
+				{% for participacion in participaciones %}
+					<tr>
+						<td>
+							{{participacion.proyecto.id}}
+						</td>
+						<td>
+							{{participacion.proyecto.nombre}}
+						</td>
+						<td>
+							{{participacion.rol}}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		
+		<a href="{{path('usuario_proyecto_new')}}">Registrar nuevo Proyecto</a>
+
+	</div>
+
+
+
+{% endblock %}

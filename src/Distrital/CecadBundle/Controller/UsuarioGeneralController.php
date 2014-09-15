@@ -45,7 +45,7 @@ class UsuarioGeneralController extends Controller
 		
 		
 		
-        return $this->render('DistritalCecadBundle:Usuario:index_general.html.twig', 
+        return $this->render('DistritalCecadBundle:UsuarioGeneral:index_general.html.twig', 
         		array(
 					'usuario'=>$usuario,
         			'participaciones'=>$participaciones,
@@ -74,7 +74,7 @@ class UsuarioGeneralController extends Controller
 
 
 
-        return $this->render('DistritalCecadBundle:Usuario:miPerfil.html.twig', 
+        return $this->render('DistritalCecadBundle:UsuarioGeneral:miPerfil.html.twig', 
         		array(
 					'usuario'=>$usuario,
         		));
@@ -106,7 +106,7 @@ class UsuarioGeneralController extends Controller
 
 
 
-        return $this->render('DistritalCecadBundle:Usuario:miPerfil.html.twig', 
+        return $this->render('DistritalCecadBundle:UsuarioGeneral:miPerfil.html.twig', 
         		array(
 					'usuario'=>$usuario,
         		));

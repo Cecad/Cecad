@@ -1,44 +1,55 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-	<h1>Datos del usuario</h1>
-	Nombres: {{usuario.nombre}}<br/>
-	Apéllidos: {{usuario.apellido}}<br/>
-	Documento: {{usuario.cedula}}<br/>
+    <h1>Usuario list</h1>
 
-	<div>
-		<h1>Resumen Proyectos</h1>
-		
-		<table>
-			<thead>
-				<tr>
-					<th>id</th>
-					<th>Nombre</th>
-					<th>Rol</th>
-				</tr>
-			</thead>
-		
-			<tbody>
-				{% for participacion in participaciones %}
-					<tr>
-						<td>
-							{{participacion.proyecto.id}}
-						</td>
-						<td>
-							{{participacion.proyecto.nombre}}
-						</td>
-						<td>
-							{{participacion.rol}}
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		
-		<a href="{{path('usuario_proyecto_new')}}">Registrar nuevo Proyecto</a>
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Celular</th>
+                <th>Telefono</th>
+                <th>Profesion</th>
+                <th>Estado</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('administracion_usuario_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.cedula }}</td>
+                <td>{{ entity.nombre }}</td>
+                <td>{{ entity.apellido }}</td>
+                <td>{{ entity.correo }}</td>
+                <td>{{ entity.celular }}</td>
+                <td>{{ entity.telefono }}</td>
+                <td>{{ entity.profesion }}</td>
+                <td>{{ entity.estado }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('administracion_usuario_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('administracion_usuario_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-	</div>
-
-
-
-{% endblock %}
+        <ul>
+        <li>
+            <a href="{{ path('administracion_usuario_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

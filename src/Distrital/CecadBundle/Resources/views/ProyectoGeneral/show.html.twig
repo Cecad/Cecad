@@ -1,0 +1,114 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Datos del Proyecto</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ entity.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Objetivo del proyecto</th>
+                <td>{{ entity.objetivos }}</td>
+            </tr>
+            <tr>
+                <th>Descripción del proyecto</th>
+                <td>{{ entity.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ entity.estado }}</td>
+            </tr>
+            <tr>
+                <th>Integrantes</th>
+                <td>
+                	<ol>
+				        {% for participante in entity.participantes %}
+				        	<li>{{ participante.rol }} - {{ participante.usuario.nombre }}</li>
+				        {% endfor %}
+                	<ol>
+                	<a class="btn btn-default" href="{{ path('usuario_agregar_integrante') }}">Agregar integrante</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    {% if entity.estado=="A" %}
+		<h1>Aportes</h1>
+		<table class="record_properties">
+		    <tbody>
+		        <tr>
+		            <th>Fecha Inicio</th>
+		            <td>{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</td>
+		        </tr>
+		        <tr>
+		            <th>Fecha Final</th>
+		            <td>{{ entity.fechaFinal|date('Y-m-d H:i:s') }}</td>
+		        </tr>
+		        <tr>
+		            <th>Entregables por calendario</th>
+		            <td>* ToDo *</td>
+		     	</tr>
+		        <tr>
+		            <th>Adjuntar</th>
+		            <td>* ToDo *</td>
+		        </tr>
+			</tbody>
+		</table>
+	{% endif %}
+	
+	
+    <h1>Cores</h1>
+    
+    <table class="record_properties">
+    	<thead>
+		    <tr>
+		        <th>Estado</th>
+		        <th>Maquina virtual</th>
+		        <th>Sistema operativo</th>
+		        <th>Programas instalados</th>
+		        <th>Tiempo utilización</th>
+		        <th>Costo operación</th>
+		        <th>Acciones</th>
+		    </tr>
+		</thead>
+	    <tbody>
+		{% for core in cores %}
+		    <tr>
+		        <th>{{core.estado}}</th>
+		        <th>{{core.nombre}}</th>
+		        <th>{{core.sistemaOperativo}}</th>
+		        <th>{{core.programasInstalados}}</th>
+		        <th>{{core.tiempoSolicitado}}</th>
+		        <th>{{core.paquete.precio}}</th>
+		    </tr>
+		{% endfor %}
+		</tbody>
+    </table>
+    <a class="btn btn-default" href="{{path('core_new', {id:entity.id}) }}">Solicitar core para el proyecto</a>
+
+
+
+
+
+
+    <ul class="record_actions">
+		<li>
+		    <a href="{{ path('usuario_index') }}">
+		        Volver a la lista detallada
+		    </a>
+		</li>
+		<li>
+		    <a href="{{ path('usuario_proyecto_edit', { 'id': entity.id }) }}">
+		        Editar
+		    </a>
+		</li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

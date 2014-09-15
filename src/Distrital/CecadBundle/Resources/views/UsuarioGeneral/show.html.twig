@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Proyecto</h1>
+    <h1>Usuario</h1>
 
     <table class="record_properties">
         <tbody>
@@ -10,28 +10,36 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
+                <th>Cedula</th>
+                <td>{{ entity.cedula }}</td>
+            </tr>
+            <tr>
+                <th>Clave</th>
+                <td>{{ entity.clave }}</td>
+            </tr>
+            <tr>
                 <th>Nombre</th>
                 <td>{{ entity.nombre }}</td>
             </tr>
             <tr>
-                <th>Presupuesto</th>
-                <td>{{ entity.presupuesto }}</td>
+                <th>Apellido</th>
+                <td>{{ entity.apellido }}</td>
             </tr>
             <tr>
-                <th>Fechainicio</th>
-                <td>{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</td>
+                <th>Correo</th>
+                <td>{{ entity.correo }}</td>
             </tr>
             <tr>
-                <th>Fechafinal</th>
-                <td>{{ entity.fechaFinal|date('Y-m-d H:i:s') }}</td>
+                <th>Celular</th>
+                <td>{{ entity.celular }}</td>
             </tr>
             <tr>
-                <th>Descripcion</th>
-                <td>{{ entity.descripcion }}</td>
+                <th>Telefono</th>
+                <td>{{ entity.telefono }}</td>
             </tr>
             <tr>
-                <th>Objetivos</th>
-                <td>{{ entity.objetivos }}</td>
+                <th>Profesion</th>
+                <td>{{ entity.profesion }}</td>
             </tr>
             <tr>
                 <th>Estado</th>
@@ -42,12 +50,12 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('administracion_proyecto') }}">
+        <a href="{{ path('admin_usuario') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('administracion_proyecto_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('admin_usuario_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
