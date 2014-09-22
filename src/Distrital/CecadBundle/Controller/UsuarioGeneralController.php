@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 
 use Distrital\CecadBundle\Entity\Usuario;
+use Distrital\CecadBundle\Entity\ParticipanteProyecto;
 use Distrital\CecadBundle\Form\UsuarioType;
 
 
@@ -88,28 +89,86 @@ class UsuarioGeneralController extends Controller
 	/**
 	* Agregar integrante
 	*
-	* @Route("/", name="usuario_agregar_integrante")
+	* @Route("/agregarIntegrante/{id}", name="usuario_agregar_integrante")
 	* @Method({"GET", "POST"})
 	* @Template()
 	*/
-    public function agregarIntegranteAction()
+    public function agregarIntegranteAction($id)
     {
 		$em = $this->getDoctrine()->getManager();
 
+    	$request = $this->getRequest(); 
 		$usuario = $this->getUser();
 
-		$id = 0;
+
 		if (!isset($usuario)){
 			return $this->redirect($this->generateUrl('distrital_cecad_homepage'));
 		}
 
+		$datos = $request->get('form');
 
+		$cedula = $datos["cedula"];
 
-
-        return $this->render('DistritalCecadBundle:UsuarioGeneral:miPerfil.html.twig', 
+		$defaultData = array('message' => '');
+		$form = $this->createFormBuilder($defaultData)
+		    ->add('cedula', 'number',  array('label' => 'Cedula', 'data' => $cedula))
+		    ->add('send', 'submit',  array('label' => 'Filtrar'))
+		    ->getForm();
+		$form->handleRequest($request);
+		
+		
+        $r_usuarios = $em->getRepository('DistritalCecadBundle:Usuario');
+        $r_proyectos = $em->getRepository('DistritalCecadBundle:Proyecto');
+        $r_partitipante = $em->getRepository('DistritalCecadBundle:ParticipanteProyecto');
+        $usuario = $r_usuarios->findOneBy(array("cedula"=>$cedula));
+        $proyecto = $r_proyectos->find($id);
+        
+        
+        $novalido=false;
+        $mensaje = "";
+        
+        if ($usuario==null){
+        	$novalido=true;
+        	if ($cedula!=""){
+	        	$mensaje = "El usuario no se encuentra registrado en el sistema";
+        	}
+        }else{
+		
+			$listaParticipantes = $proyecto->getParticipantes();
+			$novalido = false;
+			foreach($listaParticipantes as $participante){
+				if ($participante->getUsuario()->getId()==$usuario->getId()){
+					$novalido = true;
+					$mensaje = "El usuario ya es participante del proyecto como ".$participante->getRol();
+				}
+			}
+		}
+		
+		
+		if (!$form->isValid() || $novalido) {
+	        return $this->render('DistritalCecadBundle:UsuarioGeneral:agregarIntegrante.html.twig', 
         		array(
-					'usuario'=>$usuario,
+					'cedula'=>$cedula,
+					'form'=>$form->createView(),
+					'id'=>$id,
+					'mensaje'=>$mensaje,
         		));
+		}
+		
+		
+		$pp = new ParticipanteProyecto();
+		$pp->setUsuario($usuario);
+		$pp->setProyecto($proyecto);
+		$pp->setRol("Integrante");
+		$em = $this->getDoctrine()->getManager();
+		$em->persist($pp);
+		$em->flush();
+		
+		
+		
+		
+		
+		return $this->redirect($this->generateUrl('usuario_proyecto_show', array('id' => $id)));		
     }
 
 
