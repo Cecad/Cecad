@@ -6,4 +6,31 @@
 <h1>Precios</h1>
 hola esta es la pagina de precios
 
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Ram (Gb)</th>
+                <th>Procesador (Cantidad)</th>
+                <th>Almacenamiento (Gb)</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in paquetes %}
+            <tr>
+                <td>{{ entity.nombre }}</td>
+                <td>{{ entity.categoria }}</td>
+                <td>{{ entity.ram }}</td>
+                <td>{{ entity.procesador }}</td>
+                <td>{{ entity.almacenamiento }}</td>
+                <td>{{ moneda(entity.precio)|raw }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
 {% endblock %}
