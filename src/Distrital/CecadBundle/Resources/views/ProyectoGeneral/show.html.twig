@@ -33,7 +33,9 @@
 				        	<li>{{ participante.rol }} - {{ participante.usuario.nombre }}</li>
 				        {% endfor %}
                 	<ol>
-                	<a class="btn btn-default" href="{{ path('usuario_agregar_integrante') }}">Agregar integrante</a>
+                	{% if entity.participantes|length < 3 %}
+	                	<a class="btn btn-default" href="{{ path('usuario_agregar_integrante', {'id':entity.id}) }}">Agregar integrante</a>
+                	{% endif %}
                 </td>
             </tr>
         </tbody>
@@ -87,6 +89,11 @@
 		        <th>{{core.programasInstalados}}</th>
 		        <th>{{core.tiempoSolicitado}}</th>
 		        <th>{{core.paquete.precio}}</th>
+		        <td>
+		        	{% if core.estado=='T' %}
+				        <a class="btn btn-success" href="{{ path('usuario_proyecto_subirAporte', { 'id': core.id }) }}">Subir aporte</a>
+				    {% endif %}
+		        </td>
 		    </tr>
 		{% endfor %}
 		</tbody>

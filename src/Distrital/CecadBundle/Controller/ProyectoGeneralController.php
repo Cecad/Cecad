@@ -19,6 +19,50 @@ use Distrital\CecadBundle\Form\ProyectoType;
 class ProyectoGeneralController extends Controller
 {
 
+
+	
+	
+  	/**
+     * Subir aportes del Core.
+     *
+     * @Route("/subirAporte/{id}/", name="usuario_proyecto_subirAporte")
+     * @Method("GET")
+     * @Template()
+     */
+    public function subirAporteAction($id)
+    {
+    
+
+    	$request = $this->getRequest(); 
+		$usuario = $this->getUser();
+	    $em = $this->getDoctrine()->getManager();
+        $r_cores = $em->getRepository('DistritalCecadBundle:Core');
+        $core = $r_cores->find($id);
+        $proyecto = $core->getProyecto();
+        
+		$defaultData = array('message' => '');
+		$form = $this->createFormBuilder($defaultData)
+			->add('name')
+			->add('file')
+			->getForm();
+
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$em = $this->getDoctrine()->getManager();
+
+			$em->persist($document);
+			$em->flush();
+
+			return $this->redirect($this->generateUrl('usuario_proyecto_show', array('id' => $core->getProyecto()->getId())));
+		}
+
+		return array(
+			'form' => $form->createView(),
+			'proyecto'=>$proyecto,
+		);
+    }
+    
     /**
      * Lista todos los proyectos terminados.
      *
@@ -39,7 +83,7 @@ class ProyectoGeneralController extends Controller
 
         $entities = $em->getRepository('DistritalCecadBundle:Proyecto')->findByEstado("T");
 
-        return $this->render('DistritalCecadBundle:Proyecto:terminados.html.twig', 
+        return $this->render('DistritalCecadBundle:ProyectoGeneral:terminados.html.twig', 
 		   	array(
 		        'entities' => $entities,
 		    ));

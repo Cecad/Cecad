@@ -18,6 +18,31 @@ use Distrital\CecadBundle\Form\ProyectoAdministracionType;
 class ProyectoController extends Controller
 {
 
+
+  	/**
+     * Lists all Proyecto entities.
+     *
+     * @Route("/aceptarSoliciturCore/{id}/{estado}", name="administracion_proyecto_aceptarSolicitudCore")
+     * @Method("GET")
+     * @Template()
+     */
+    public function aceptarSolicitudCoreAction($id,$estado)
+    {
+    
+    	// Si el usuario es administrador
+    	
+    
+    	$em = $this->getDoctrine()->getManager();
+        $r_cores = $em->getRepository('DistritalCecadBundle:Core');
+        $core = $r_cores->find($id);
+        $core->setEstado($estado);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($core);
+        $em->flush();
+        return $this->redirect($this->generateUrl('administracion_proyecto_show', array('id' => $core->getProyecto()->getId())));
+    }
+	
+
     /**
      * Lists all Proyecto entities.
      *
@@ -111,15 +136,18 @@ class ProyectoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('DistritalCecadBundle:Proyecto')->find($id);
+        $r_core = $em->getRepository('DistritalCecadBundle:Core');
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Proyecto entity.');
         }
 
+		$cores = $r_core->findByProyecto($entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'entity'      => $entity,
+            'cores'      => $cores,
             'delete_form' => $deleteForm->createView(),
         );
     }

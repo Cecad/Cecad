@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Proyecto</h1>
+    <h1>Datos del Proyecto modo administración</h1>
 
     <table class="record_properties">
         <tbody>
@@ -14,43 +14,106 @@
                 <td>{{ entity.nombre }}</td>
             </tr>
             <tr>
-                <th>Presupuesto</th>
-                <td>{{ entity.presupuesto }}</td>
-            </tr>
-            <tr>
-                <th>Fechainicio</th>
-                <td>{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Fechafinal</th>
-                <td>{{ entity.fechaFinal|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Descripcion</th>
-                <td>{{ entity.descripcion }}</td>
-            </tr>
-            <tr>
-                <th>Objetivos</th>
+                <th>Objetivo del proyecto</th>
                 <td>{{ entity.objetivos }}</td>
+            </tr>
+            <tr>
+                <th>Descripción del proyecto</th>
+                <td>{{ entity.descripcion }}</td>
             </tr>
             <tr>
                 <th>Estado</th>
                 <td>{{ entity.estado }}</td>
             </tr>
+            <tr>
+                <th>Integrantes</th>
+                <td>
+                	<ol>
+				        {% for participante in entity.participantes %}
+				        	<li>{{ participante.rol }} - {{ participante.usuario.nombre }}</li>
+				        {% endfor %}
+                	<ol>
+                </td>
+            </tr>
         </tbody>
     </table>
+    
+    {% if entity.estado=="A" %}
+		<h1>Aportes</h1>
+		<table class="record_properties">
+		    <tbody>
+		        <tr>
+		            <th>Fecha Inicio</th>
+		            <td>{{ entity.fechaInicio|date('Y-m-d H:i:s') }}</td>
+		        </tr>
+		        <tr>
+		            <th>Fecha Final</th>
+		            <td>{{ entity.fechaFinal|date('Y-m-d H:i:s') }}</td>
+		        </tr>
+		        <tr>
+		            <th>Entregables por calendario</th>
+		            <td>* ToDo *</td>
+		     	</tr>
+		        <tr>
+		            <th>Adjuntar</th>
+		            <td>* ToDo *</td>
+		        </tr>
+			</tbody>
+		</table>
+	{% endif %}
+	
+	
+    <h1>Cores</h1>
+    
+    <table class="record_properties">
+    	<thead>
+		    <tr>
+		        <th>Estado</th>
+		        <th>Maquina virtual</th>
+		        <th>Sistema operativo</th>
+		        <th>Programas instalados</th>
+		        <th>Tiempo utilización</th>
+		        <th>Costo operación</th>
+		        <th>Acciones</th>
+		    </tr>
+		</thead>
+	    <tbody>
+		{% for core in cores %}
+		    <tr>
+		        <td>{{core.estado}}</td>
+		        <td>{{core.nombre}}</td>
+		        <td>{{core.sistemaOperativo}}</td>
+		        <td>{{core.programasInstalados}}</td>
+		        <td>{{core.tiempoSolicitado}}</td>
+		        <td>{{core.paquete.precio}}</td>
+		        <td>
+		        	{% if core.estado=='S' %}
+				        <a class="btn btn-success" href="{{ path('administracion_proyecto_aceptarSolicitudCore', { 'id': core.id, 'estado':'A'}) }}">Aceptar Solicitud</a>
+				        <a class="btn btn-danger" href="{{ path('administracion_proyecto_aceptarSolicitudCore', { 'id': core.id, 'estado':'C'}) }}">Negar Solicitud</a>
+		        	{% elseif core.estado=='A' %}
+				        <a class="btn btn-warning" href="{{ path('administracion_proyecto_aceptarSolicitudCore', { 'id': core.id, 'estado':'T'}) }}">Terminar proceso del Core</a>
+				    {% endif %}
+		        
+		        </td>
+		    </tr>
+		{% endfor %}
+		</tbody>
+    </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('administracion_proyecto') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('administracion_proyecto_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
+
+
+
+    <ul class="record_actions">
+		<li>
+		    <a href="{{ path('administracion_proyecto') }}">
+		        Volver a la lista detallada
+		    </a>
+		</li>
+		<li>
+		    <a href="{{ path('administracion_proyecto_edit', { 'id': entity.id }) }}">
+		        Editar
+		    </a>
+		</li>
     <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

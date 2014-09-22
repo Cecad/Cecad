@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Subir aporte al proyecto</h1>
+
+    {{ form(form) }}
+    <a href="{{ path('usuario_proyecto_show', {'id':proyecto.id}) }}">
+        Cancelar y volver
+    </a>
+</ul>
+{% endblock %}

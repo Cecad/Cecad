@@ -5,6 +5,7 @@
 
 <a class="btn btn-default" href="{{ path('administracion_usuario') }}">Administrar Usuarios</a>
 <a class="btn btn-default" href="{{ path('administracion_proyecto') }}">Administrar Proyectos</a>
+<a class="btn btn-default" href="{{ path('admin_paquete') }}">Administrar Paquetes</a>
     <h1>Lista de Proyectos modo administración</h1>
 
     <table class="records_list">
@@ -45,7 +46,7 @@
 	            <td>
 	            <ul>
 	                <li>
-	                    <a href="{{ path('usuario_proyecto_show', { 'id': entity.id }) }}">Detalles</a>
+	                    <a href="{{ path('administracion_proyecto_show', { 'id': entity.id }) }}">Detalles</a>
 	                </li>
 	                
 	            </ul>
