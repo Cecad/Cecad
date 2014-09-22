@@ -56,7 +56,7 @@
 											<ul>
 											{# Esto se debe colocar en el menu actual class="current_page_item"   #}
 												<li><a href="{{ path('distrital_cecad_contenidos', {'pagina': 'Caracteristicas'}) }}">Caracteristicas</a></li>
-												<li><a href="{{ path('distrital_cecad_contenidos', {'pagina': 'Precios'}) }}">Precios</a></li>
+												<li><a href="{{ path('distrital_cecad_contenidos_precios') }}">Precios</a></li>
 												<li><a href="{{ path('distrital_cecad_contenidos', {'pagina': 'Documentacion'}) }}">Documentación</a></li>
 												{% if app.user  %}
 													<li><a href="{{ path('usuario_index') }}">{{ app.user.nombre }} {{ app.user.apellido }}</a></li>
@@ -79,7 +79,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="12u skel-cell-important">
-
+							<a class="fa fa-home fa-border" href="{{path('distrital_cecad_homepage')}}" style="color: #333333;font-size: 1.5em;">Inicio</a>
 							<!-- Content -->
 								<div id="content">
 							        {% block body %}
