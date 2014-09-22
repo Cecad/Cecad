@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+
+{% if mensaje is defined %}
+	{{mensaje}}
+{% endif %}
+
+
+{% if form is defined %}
+	{{form(form)}}
+{% endif %}
+
+
+En el proyecto {{id}} <br>
+
+La cedula ingresada es [{{cedula}}]
+
+
+
+{% endblock %}
