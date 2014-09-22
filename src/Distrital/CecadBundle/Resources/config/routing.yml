@@ -31,9 +31,14 @@ distrital_cecad_homepage:
     defaults: { _controller: DistritalCecadBundle:Default:index }
 
 
+distrital_cecad_contenidos_precios:
+    pattern:  /page/Precios
+    defaults: { _controller: DistritalCecadBundle:Contenidos:precios }
+
 distrital_cecad_contenidos:
     pattern:  /page/{pagina}
     defaults: { _controller: DistritalCecadBundle:Contenidos:index }
+
 
 
 distrital_cecad_usuario:
