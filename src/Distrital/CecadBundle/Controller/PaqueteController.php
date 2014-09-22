@@ -13,7 +13,7 @@ use Distrital\CecadBundle\Form\PaqueteType;
 /**
  * Paquete controller.
  *
- * @Route("/admin/paquete")
+ * @Route("/administrador/paquete")
  */
 class PaqueteController extends Controller
 {
