@@ -15,7 +15,7 @@ use Distrital\CecadBundle\Form\UsuarioType;
 /**
  * Administrador controller.
  *
- * @Route("/Administrador")
+ * @Route("/administrador")
  */
 class AdministradorController extends Controller
 {
