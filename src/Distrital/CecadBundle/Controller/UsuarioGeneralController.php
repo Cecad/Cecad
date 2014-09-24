@@ -57,7 +57,7 @@ class UsuarioGeneralController extends Controller
 	/**
 	* Mi perfil action
 	*
-	* @Route("/", name="usuario_miPerfil")
+	* @Route("/perfil", name="usuario_miPerfil")
 	* @Method("GET")
 	* @Template()
 	*/
@@ -75,9 +75,9 @@ class UsuarioGeneralController extends Controller
 
 
 
-        return $this->render('DistritalCecadBundle:UsuarioGeneral:miPerfil.html.twig', 
+        return $this->render('DistritalCecadBundle:UsuarioGeneral:show.html.twig', 
         		array(
-					'usuario'=>$usuario,
+					'entity'=>$usuario,
         		));
     }
 
